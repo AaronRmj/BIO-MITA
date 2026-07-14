@@ -4,6 +4,7 @@ import { Leaf, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Label } from "@radix-ui/react-label";
 import { Input } from "@/components/ui/input";
+import Illustration from "../assets/fauneflore.svg";
 
 
 // refa mse connecter dia mandray valeur iray amreo
@@ -67,7 +68,7 @@ export default function LoginScreen ({onLogin}: LoginProps){
             <div>
               <Label>Identifiant</Label>
               <Input
-                defaultValue={role === "agent" ? "fenosoa.rakoto" : "voahangy.responsable"}
+                defaultValue={role === "agent" ? "lord snow" : "monsieur.responsable"}
               />
             </div>
             <div>
@@ -78,28 +79,15 @@ export default function LoginScreen ({onLogin}: LoginProps){
               Se connecter <ChevronRight size={16} />
             </Button>
           </div>
-
-          <p className="text-xs text-stone-400 mt-8 text-center">
-            Un souci de connexion ? Contactez votre coordinateur d'aire protégée.
-          </p>
         </div>
       </div>
 
-      <div className="hidden lg:block relative">
+      <div className="hidden lg:flex items-center justify-center bg-emerald-50 h-full">
         <img
-          src="https://images.pexels.com/photos/12879017/pexels-photo-12879017.jpeg?auto=compress&cs=tinysrgb&w=1400"
-          alt="Forêt d'une aire protégée à Madagascar"
-          className="absolute inset-0 w-full h-full object-cover"
+          src={Illustration}
+          alt="Illustration terrain BIO MITA"
+          className="w-full h-full object-contain p-16"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-stone-900/75 via-stone-900/10 to-transparent" />
-        <div className="absolute bottom-10 left-10 right-10 text-white">
-          <p className="text-sm uppercase tracking-widest text-emerald-200 mb-2">
-            Andasibe-Mantadia
-          </p>
-          <p className="text-2xl font-medium leading-snug max-w-md">
-            Chaque visite, chaque observation, chaque signalement compte pour la forêt malgache.
-          </p>
-        </div>
       </div>
     </div>
   )
