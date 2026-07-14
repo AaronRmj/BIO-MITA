@@ -1,10 +1,10 @@
 import './App.css'
-
+import Layout from './layouts/layout'
 function App() {
 
   return (
-    <div className='text-red-600 bg-black'>
-      hello world
+    <div>
+      <Layout />
     </div>
   )
 }

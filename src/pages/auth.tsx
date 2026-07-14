@@ -1,0 +1,108 @@
+import { useState } from "react";
+import { Leaf, ChevronRight } from "lucide-react";
+
+import { Button } from "@/components/ui/button";
+import { Label } from "@radix-ui/react-label";
+import { Input } from "@/components/ui/input";
+
+
+// refa mse connecter dia mandray valeur iray amreo
+type Role  = "agent" | "responsable";
+
+type LoginProps = {
+
+  // mitondra ilay role oe agent sa responsable, parametre 
+  onLogin: (role: Role) => void;
+};
+
+
+
+export default function LoginScreen ({onLogin}: LoginProps){
+
+  //<Role>: memoire qui ne peut contenir que agent ou responsable
+  const[role, setRole] = useState<Role>("agent");
+
+  const roles: {key: Role, label: string}[] = [
+    {key: "agent", label:"agent de terrain"},
+    {key: "responsable", label: "responsable"},
+  ];
+
+  return(
+    <div className="min-h-screen grid lg:grid-cols-2 bg-white">
+      <div className="flex flex-col justify-center px-8 sm:px-16 py-12">
+        <div className="max-w-sm mx-auto w-full">
+          <div className="flex items-center gap-2.5 mb-10">
+            <div className="w-9 h-9 rounded-xl bg-emerald-900 flex items-center justify-center shadow-sm">
+              <Leaf size={18} className="text-white" />
+            </div>
+            <span className="font-semibold text-lg tracking-tight text-stone-900">
+              BIO MITA
+            </span>
+          </div>
+
+          <h1 className="text-2xl font-semibold text-stone-900 mb-1 tracking-tight">
+            Connexion
+          </h1>
+          <p className="text-sm text-stone-500 mb-8">
+            Gestion des aires protégées de Madagascar
+          </p>
+
+          <div className="grid grid-cols-2 gap-1 p-1 bg-stone-100 rounded-xl mb-8">
+            {roles.map((r) => (
+              <button
+                key={r.key}
+                onClick={() => setRole(r.key)}
+                className={`py-2 rounded-lg text-sm font-medium transition-all ${
+                  role === r.key
+                    ? "bg-white text-stone-900 shadow-sm"
+                    : "text-stone-500 hover:text-stone-700"
+                }`}
+              >
+                {r.label}
+              </button>
+            ))}
+          </div>
+
+          <div className="space-y-4">
+            <div>
+              <Label>Identifiant</Label>
+              <Input
+                defaultValue={role === "agent" ? "fenosoa.rakoto" : "voahangy.responsable"}
+              />
+            </div>
+            <div>
+              <Label>Mot de passe</Label>
+              <Input type="password" defaultValue="••••••••" />
+            </div>
+            <Button className="w-full mt-2" size="lg" onClick={() => onLogin(role)}>
+              Se connecter <ChevronRight size={16} />
+            </Button>
+          </div>
+
+          <p className="text-xs text-stone-400 mt-8 text-center">
+            Un souci de connexion ? Contactez votre coordinateur d'aire protégée.
+          </p>
+        </div>
+      </div>
+
+      <div className="hidden lg:block relative">
+        <img
+          src="https://images.pexels.com/photos/12879017/pexels-photo-12879017.jpeg?auto=compress&cs=tinysrgb&w=1400"
+          alt="Forêt d'une aire protégée à Madagascar"
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-stone-900/75 via-stone-900/10 to-transparent" />
+        <div className="absolute bottom-10 left-10 right-10 text-white">
+          <p className="text-sm uppercase tracking-widest text-emerald-200 mb-2">
+            Andasibe-Mantadia
+          </p>
+          <p className="text-2xl font-medium leading-snug max-w-md">
+            Chaque visite, chaque observation, chaque signalement compte pour la forêt malgache.
+          </p>
+        </div>
+      </div>
+    </div>
+  )
+
+
+}
